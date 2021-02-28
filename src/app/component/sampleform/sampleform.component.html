@@ -1,0 +1,89 @@
+<h2>League Manager</h2>
+<form [formGroup]="leagueForm">
+  <div class="form-header" formGroupName="league_details">
+    <label>League Name <input formControlName="name" /></label>
+    <label>Founder <input formControlName="founder" /></label>
+  </div>
+
+  <hr />
+  <button type="button" (click)="addTeam()">Add Team</button>
+  <div formArrayName="teams">
+    <div
+      class="teams"
+      *ngFor="
+        let team of leagueForm.get('teams').controls;
+        let teamIndex = index
+      "
+      [formGroupName]="teamIndex"
+    >
+      <label
+        >Team Name <input formControlName="team_name" />
+        <button (click)="deleteTeam(teamIndex)">x</button></label
+      >
+      <hr />
+      <button type="button" (click)="addPlayer(team)">Add Player</button>
+      <div formArrayName="players">
+        <div
+          class="players"
+          *ngFor="
+            let player of team.get('players').controls;
+            let playerIndex = index
+          "
+          [formGroupName]="playerIndex"
+        >
+          <label
+            >Player Name <input formControlName="player_name" />
+            <button (click)="deletePlayer(team, playerIndex)">x</button></label
+          >
+          <label>Player Number <input formControlName="player_number" /></label>
+          <span *ngIf="player.get('player_number').touched">touched!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{{ this.leagueForm.value | json }}
+
+
+
+
+                           <!-- <h3 style="padding: 0 !important; margin: 0 auto !important;">{{ itemOrcamento.item.descricao }}</h3>
+    <h6 fxFlex="100" class="text-primary" style="margin: 15px; font-weight: 600; text-align: right;">Item {{ itemOrcadoIndex + 1  }} de {{cardsForm.value.itens.length}}</h6>
+    <p fxFlex="50" fxFlex.xs="50" class="txt" style="padding: 0 15px;"><span class="negrito">Quantidade:</span> {{ itemOrcamento.item.quantidade }}</p>
+    <p fxFlex="50" fxFlex.xs="50" class="txt" style="padding: 0 15px;text-align:right"><span class="negrito">Cód.:</span> {{ itemOrcamento.item.codigo }}</p> 
+    <mat-form-field fxFlex="100" style="    padding: 0 15px 15px;">
+        <mat-select name="fabricante"  formControlName="fabricante" required>
+            <mat-option *ngFor="let fab of fabricantes" [value]="fab._id">{{fab.nome}}</mat-option>
+        </mat-select>
+        <mat-label>Fabricante</mat-label>
+    </mat-form-field>
+    <mat-form-field style="padding: 0 15px;">
+        <mat-select name="estado" formControlName="estado" (selectionChange)="setEstadoItem(a, $event)" required>
+            <mat-option selected value="NOVA">NOVA</mat-option>
+            <mat-option value="USADA">USADA</mat-option>
+        </mat-select>
+        <mat-label>Estado</mat-label>
+    </mat-form-field>
+    <mat-form-field fxFlex="50" style="padding: 0 15px;">
+        <input name="valor_unit" matInput class="form-control" formControlName="valor_unit" placeholder="Preço R$">
+      </mat-form-field>
+      <mat-form-field fxFlex="50" style="padding: 0 15px;">
+        <input name="valor_total" class="form-control" formControlName="valor_total" matInput>
+      </mat-form-field>
+    <mat-form-field style="padding: 0 15px;">
+        <mat-label>Prazo entrega*</mat-label>
+        <input name="prazo_entrega" formControlName="prazo_entrega" matInput class="form-control" placeholder="Prazo de entrega" min="1" max="365" type="number" >
+        <span matSuffix>dias</span>
+      </mat-form-field>
+    <mat-form-field style="padding: 0 15px;">
+        <mat-select
+            [disabled]="(prazo_entrega < 3)" formControlName="motivo" required>
+            <mat-option *ngFor="let motivo of filterMotivosMotivos(configService.motivos,item)" [value]="motivo._id">{{motivo.texto}}</mat-option>
+        </mat-select>
+        <mat-label>Motivo</mat-label>
+        <mat-error *ngIf="itens_orcados?.controls[i]?.controls?.motivo?.errors?.required">Campo obrigatório</mat-error>
+    </mat-form-field> -->
+
+
+
+
